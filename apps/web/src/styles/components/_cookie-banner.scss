@@ -1,0 +1,95 @@
+html.db-has-cookie-banner .db-main {
+  padding-bottom: clamp(5rem, 18vh, 10rem);
+}
+
+.db-cookie-banner {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 500;
+  padding: 1rem var(--container-gutter, 1.5rem);
+  padding-bottom: max(1rem, env(safe-area-inset-bottom, 0px));
+  background: linear-gradient(180deg, rgba(20, 40, 63, 0.97), rgba(20, 40, 63, 0.99));
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 -8px 32px rgba(0, 0, 0, 0.2);
+}
+
+.db-cookie-banner__inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1rem 1.5rem;
+}
+
+.db-cookie-banner__text {
+  flex: 1 1 16rem;
+  max-width: 42rem;
+}
+
+.db-cookie-banner__title {
+  margin: 0 0 0.35rem;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--color-white);
+  letter-spacing: 0.02em;
+}
+
+.db-cookie-banner__desc {
+  margin: 0;
+  font-size: 0.85rem;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.78);
+}
+
+.db-cookie-banner__link {
+  color: var(--color-accent);
+  font-weight: 500;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.db-cookie-banner__link:hover {
+  color: var(--color-secondary-light);
+}
+
+.db-cookie-banner__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  flex-shrink: 0;
+}
+
+.db-cookie-banner__btn {
+  padding: 0.55rem 1.1rem;
+  border-radius: var(--radius-md);
+  font: inherit;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: var(--transition);
+}
+
+.db-cookie-banner__btn--ghost {
+  background: transparent;
+  color: rgba(255, 255, 255, 0.9);
+  border-color: rgba(255, 255, 255, 0.25);
+}
+
+.db-cookie-banner__btn--ghost:hover {
+  border-color: rgba(255, 255, 255, 0.45);
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.db-cookie-banner__btn--primary {
+  background: var(--color-accent);
+  color: var(--color-white);
+  border-color: var(--color-accent);
+}
+
+.db-cookie-banner__btn--primary:hover {
+  background: var(--color-accent-hover);
+  border-color: var(--color-accent-hover);
+}

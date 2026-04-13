@@ -1,0 +1,118 @@
+// Globalne prilagodbe za uske ekrane i touch uređaje
+
+@media (max-width: 768px) {
+  .db-main {
+    padding-block: 1.75rem 3rem;
+  }
+
+  .db-page__head {
+    margin-bottom: 1.35rem;
+  }
+
+  .db-section {
+    margin-top: 2.5rem;
+  }
+
+  .db-section__head {
+    margin-bottom: 1.25rem;
+  }
+
+  .db-hero {
+    padding-bottom: 0.5rem;
+  }
+
+  .db-hero__grid {
+    gap: 1.75rem;
+  }
+
+  .db-hero__title {
+    font-size: clamp(1.85rem, 8vw, 2.6rem);
+  }
+
+  .db-form {
+    padding: 1.1rem 1rem;
+    max-width: none;
+  }
+
+  .db-booking__submit-row,
+  .db-booking__alt-actions,
+  .db-booking-success__actions,
+  .db-contact__actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .db-booking__submit-row .db-btn,
+  .db-booking__alt-actions .db-btn,
+  .db-booking-success__actions .db-btn,
+  .db-contact__actions .db-btn {
+    justify-content: center;
+    width: 100%;
+  }
+
+  .db-footer__bottom-inner {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .db-footer__legal {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.35rem;
+  }
+
+  .db-footer__legal-sep {
+    display: none;
+  }
+
+  .db-footer__copy {
+    text-align: left;
+    width: 100%;
+  }
+
+  .db-footer__social {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 0.5rem 1rem;
+  }
+
+  .db-review-form {
+    padding: 1.15rem 1rem;
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  .db-review-form__message {
+    padding: 0.85rem 0.75rem 1rem;
+  }
+
+  .db-stars__btn {
+    min-width: 2.75rem;
+    min-height: 2.75rem;
+    padding: 0.35rem 0.45rem;
+  }
+}
+
+@media (max-width: 520px) {
+  .db-pricelist__row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.65rem;
+  }
+
+  .db-pricelist__meta {
+    text-align: left;
+    white-space: normal;
+    width: 100%;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem;
+  }
+}
+
+@media (max-width: 380px) {
+  .db-card-grid {
+    grid-template-columns: 1fr;
+  }
+}

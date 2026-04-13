@@ -1,0 +1,78 @@
+.db-contact {
+  display: grid;
+  gap: 1.25rem;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+}
+
+.db-contact__card {
+  padding: 1.35rem 1.5rem;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-line);
+  background: var(--color-card);
+  box-shadow: var(--shadow-sm);
+}
+
+.db-contact__card--wide {
+  grid-column: 1 / -1;
+}
+
+@media (min-width: 900px) {
+  .db-contact__card--wide {
+    grid-column: span 2;
+  }
+}
+
+.db-contact__card-title {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  margin: 0 0 0.75rem;
+  color: var(--color-primary);
+}
+
+.db-contact__text {
+  margin: 0 0 1rem;
+  font-size: 0.95rem;
+  color: var(--color-text-muted);
+  line-height: 1.5;
+}
+
+.db-contact__text a {
+  color: var(--color-accent);
+  font-weight: 500;
+}
+
+.db-contact__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.db-contact__label {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--color-text-muted);
+  margin-bottom: 0.2rem;
+}
+
+.db-contact__link {
+  color: var(--color-accent);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.db-contact__link:hover {
+  text-decoration: underline;
+}
+
+.db-contact__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+  margin-top: 0.5rem;
+}

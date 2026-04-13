@@ -1,0 +1,21 @@
+{
+  "salonId": "your-salon-id",
+  "name": "Naziv salona",
+  "tagline": "Kratki slogan",
+  "domain": "primjer.hr",
+  "logoUrl": "/brand/logo.jpg",
+  "accentColor": "#4a3f8c",
+  "deepAccent": "#2d2659",
+  "surfaceColor": "#eeedf9",
+  "contact": {
+    "phone": "+385 ...",
+    "email": "info@primjer.hr",
+    "address": "Adresa",
+    "city": "Grad"
+  },
+  "social": {
+    "instagram": "",
+    "facebook": "",
+    "whatsapp": ""
+  }
+}

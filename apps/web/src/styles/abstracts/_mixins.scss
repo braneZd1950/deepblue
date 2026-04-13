@@ -1,0 +1,21 @@
+@use 'spacing' as *;
+
+@mixin breakpoint-up($width) {
+  @media (min-width: $width) {
+    @content;
+  }
+}
+
+@mixin container {
+  width: min(#{$container-max}, 100% - #{$container-gutter} * 2);
+  margin-inline: auto;
+
+  @media (max-width: 480px) {
+    width: min(#{$container-max}, 100% - 1.25rem * 2);
+  }
+}
+
+@mixin focus-ring {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}

@@ -1,0 +1,106 @@
+.db-form {
+  max-width: 480px;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1.5rem;
+  border-radius: var(--db-radius);
+  background: var(--db-card);
+  border: 1px solid var(--db-line);
+  box-shadow: var(--db-shadow);
+}
+
+.db-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  font-size: 0.9rem;
+  color: rgba(232, 246, 243, 0.85);
+}
+
+.db-field input,
+.db-field select {
+  border-radius: var(--db-radius-sm);
+  border: 1px solid var(--db-line);
+  background: rgba(4, 12, 16, 0.65);
+  color: #e8f6f3;
+  padding: 0.65rem 0.75rem;
+  font: inherit;
+}
+
+.db-field input:focus,
+.db-field select:focus {
+  outline: 2px solid rgba(94, 234, 212, 0.45);
+  outline-offset: 1px;
+}
+
+.db-form__msg {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--db-accent-soft);
+}
+
+.db-form__msg--err {
+  color: #fca5a5;
+}
+
+.db-pricelist {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.db-pricelist__cat {
+  font-family: var(--db-font-display);
+  margin: 0 0 0.75rem;
+  font-size: 1.5rem;
+}
+
+.db-pricelist__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-radius: var(--db-radius);
+  border: 1px solid var(--db-line);
+  overflow: hidden;
+  background: var(--db-card);
+}
+
+.db-pricelist__row {
+  display: flex;
+  gap: 1rem;
+  justify-content: space-between;
+  padding: 1rem 1.15rem;
+  border-bottom: 1px solid var(--db-line);
+}
+
+.db-pricelist__row:last-child {
+  border-bottom: none;
+}
+
+.db-pricelist__name {
+  margin: 0 0 0.25rem;
+  font-weight: 600;
+}
+
+.db-pricelist__desc {
+  margin: 0;
+  font-size: 0.9rem;
+  color: rgba(232, 246, 243, 0.65);
+}
+
+.db-pricelist__meta {
+  text-align: right;
+  font-size: 0.85rem;
+  color: rgba(232, 246, 243, 0.65);
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  white-space: nowrap;
+}
+
+.db-pricelist__price {
+  font-weight: 700;
+  color: var(--db-accent-soft);
+  font-size: 1rem;
+}

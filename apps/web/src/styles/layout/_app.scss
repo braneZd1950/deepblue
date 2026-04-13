@@ -1,0 +1,24 @@
+.db-app {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.db-app__glow {
+  pointer-events: none;
+  position: fixed;
+  inset: -25% -15% auto -15%;
+  height: 60vh;
+  background:
+    radial-gradient(ellipse 80% 60% at 50% 0%, rgba(232, 207, 196, 0.45), transparent 55%),
+    radial-gradient(ellipse 50% 40% at 85% 15%, rgba(201, 169, 110, 0.12), transparent 50%);
+  z-index: 0;
+}
+
+.db-main {
+  flex: 1;
+  padding-block: 2.5rem 4rem;
+  position: relative;
+  z-index: 1;
+}

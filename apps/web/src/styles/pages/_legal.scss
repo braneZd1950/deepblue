@@ -1,0 +1,38 @@
+.db-legal__back {
+  display: inline-block;
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--color-primary-light);
+  text-decoration: none;
+  transition: var(--transition);
+}
+
+.db-legal__back:hover {
+  color: var(--color-accent);
+}
+
+.db-legal__head {
+  margin-bottom: 1.5rem;
+}
+
+.db-legal__notice {
+  margin: 0.5rem 0 0;
+  max-width: 62ch;
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+}
+
+.db-legal__content {
+  max-width: 65ch;
+  color: var(--color-text);
+  line-height: 1.65;
+}
+
+.db-legal__content p {
+  margin: 0 0 1rem;
+}
+
+.db-legal__content p:last-child {
+  margin-bottom: 0;
+}

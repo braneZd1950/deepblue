@@ -1,0 +1,48 @@
+@use '../abstracts/colors' as *;
+@use '../abstracts/variables' as v;
+@use '../abstracts/spacing' as s;
+
+// CSS varijable (runtime theming / white-label) + SCSS izvor istine iz abstracts/_colors.scss
+:root {
+  --color-primary: #{$color-primary};
+  --color-primary-light: #{$color-primary-light};
+  --color-primary-dark: #{$color-primary-dark};
+  --color-secondary: #{$color-secondary};
+  --color-secondary-light: #{$color-secondary-light};
+  --color-secondary-dark: #{$color-secondary-dark};
+  --color-accent: #{$color-accent};
+  --color-accent-hover: #{$color-accent-hover};
+  --color-white: #{$color-white};
+  --color-light: #{$color-light};
+  --color-gray: #{$color-gray};
+  --color-dark: #{$color-dark};
+  --color-success: #{$color-success};
+  --color-error: #{$color-error};
+  --color-warning: #{$color-warning};
+
+  --color-bg: #{$color-light};
+  --color-bg-elevated: #{$color-white};
+  --color-text: #{$color-dark};
+  --color-text-muted: #{$color-gray};
+  --color-line: #{rgba($color-primary, 0.12)};
+  --color-card: #{$color-white};
+  --color-overlay: #{rgba($color-primary-dark, 0.45)};
+
+  --shadow-sm: #{v.$shadow-sm};
+  --shadow-md: #{v.$shadow-md};
+  --shadow-lg: #{v.$shadow-lg};
+
+  --radius-sm: #{v.$radius-sm};
+  --radius-md: #{v.$radius-md};
+  --radius-lg: #{v.$radius-lg};
+  --radius-xl: 24px;
+  --radius-pill: 999px;
+
+  --font-primary: 'Poppins', system-ui, sans-serif;
+  --font-display: 'Playfair Display', Georgia, serif;
+
+  --transition: #{v.$transition};
+
+  --container-max: #{s.$container-max};
+  --container-gutter: #{s.$container-gutter};
+}

@@ -1,0 +1,25 @@
+{
+  "name": "salon-platform",
+  "private": true,
+  "version": "0.1.0",
+  "description": "White-label MERN + Expo monorepo (Deep Blue HR demo)",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "concurrently -n api,web -c cyan,magenta \"npm run dev:api\" \"npm run dev:web\"",
+    "dev:web": "npm run dev -w @salon/web",
+    "dev:api": "npm run dev -w @salon/api",
+    "dev:mobile": "npm run start -w @salon/mobile",
+    "build:web": "npm run build -w @salon/web",
+    "build:api": "npm run build -w @salon/api",
+    "lint:web": "npm run lint -w @salon/web"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.2"
+  }
+}

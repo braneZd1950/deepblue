@@ -1,0 +1,30 @@
+// Osnovni stil linkova — vrijedi i za mobilni drawer.
+.db-nav__link {
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--color-text-muted);
+  padding: 0.35rem 0.2rem;
+  border-bottom: 2px solid transparent;
+  transition: var(--transition);
+}
+
+.db-nav__link:hover {
+  color: var(--color-primary);
+}
+
+.db-nav__link--active {
+  color: var(--color-primary);
+  border-color: var(--color-accent);
+}
+
+// display: flex SAMO na desktopu — na mobitelu layout/header.scss kontrolira skrivanje (display: none).
+@media (min-width: 769px) {
+  .db-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem 1rem;
+    align-items: center;
+    justify-content: flex-end;
+  }
+}

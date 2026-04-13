@@ -1,0 +1,130 @@
+.db-footer {
+  border-top: 1px solid var(--color-line);
+  background: var(--color-primary-dark);
+  padding-block: 2.5rem 1.25rem;
+  margin-top: auto;
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.78);
+  position: relative;
+  z-index: 1;
+}
+
+.db-footer__grid {
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+}
+
+.db-footer__title {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  margin: 0 0 0.35rem;
+  color: var(--color-white);
+}
+
+.db-footer__muted {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.65);
+}
+
+.db-footer__label {
+  font-weight: 600;
+  margin: 0 0 0.5rem;
+  color: var(--color-white);
+}
+
+.db-footer__kontakt-link {
+  margin: 0.75rem 0 0;
+}
+
+.db-footer__social {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  margin-top: 0.25rem;
+}
+
+.db-footer__link {
+  display: block;
+  margin-top: 0.25rem;
+  color: var(--color-accent);
+  text-decoration: none;
+  transition: var(--transition);
+}
+
+.db-footer__link--social {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  margin-top: 0;
+  font-weight: 500;
+}
+
+.db-footer__icon {
+  flex-shrink: 0;
+  opacity: 0.95;
+  transition: var(--transition);
+}
+
+.db-footer__link:hover,
+.db-footer__link--social:hover {
+  color: var(--color-secondary-light);
+}
+
+.db-footer__link--social:hover .db-footer__icon {
+  opacity: 1;
+  transform: translateY(-1px);
+}
+
+.db-footer__bottom {
+  margin-top: 2rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.db-footer__bottom-inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem 1.5rem;
+}
+
+.db-footer__legal {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 0.25rem;
+}
+
+.db-footer__legal-link {
+  color: rgba(255, 255, 255, 0.7);
+  text-decoration: none;
+  font-size: 0.8rem;
+  transition: var(--transition);
+}
+
+.db-footer__legal-link:hover {
+  color: var(--color-accent);
+}
+
+.db-footer__legal-sep {
+  color: rgba(255, 255, 255, 0.25);
+  user-select: none;
+  font-size: 0.75rem;
+}
+
+.db-footer__copy {
+  flex: 1 1 auto;
+  text-align: right;
+  min-width: min(100%, 16rem);
+}
+
+@media (max-width: 640px) {
+  .db-footer__copy {
+    text-align: left;
+    width: 100%;
+  }
+}

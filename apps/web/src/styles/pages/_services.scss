@@ -1,0 +1,64 @@
+// Cjenik + usluge (stranice /cjenik i dio booking konteksta)
+.db-pricelist {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.db-pricelist__cat {
+  font-family: var(--font-display);
+  margin: 0 0 0.75rem;
+  font-size: 1.5rem;
+  color: var(--color-primary);
+}
+
+.db-pricelist__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-line);
+  overflow: hidden;
+  background: var(--color-card);
+  box-shadow: var(--shadow-sm);
+}
+
+.db-pricelist__row {
+  display: flex;
+  gap: 1rem;
+  justify-content: space-between;
+  padding: 1rem 1.15rem;
+  border-bottom: 1px solid var(--color-line);
+}
+
+.db-pricelist__row:last-child {
+  border-bottom: none;
+}
+
+.db-pricelist__name {
+  margin: 0 0 0.25rem;
+  font-weight: 600;
+  color: var(--color-primary);
+}
+
+.db-pricelist__desc {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+}
+
+.db-pricelist__meta {
+  text-align: right;
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  white-space: nowrap;
+}
+
+.db-pricelist__price {
+  font-weight: 700;
+  color: var(--color-accent);
+  font-size: 1rem;
+}
