@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import type { ServiceItem } from '@salon/shared';
 import { loadServices } from '@/services/api';
 import { brand } from '@/config/brand';
+import heroImage from '@/assets/images/DEEP BLUE.jpg';
 
 export function HomePage() {
   const [services, setServices] = useState<ServiceItem[]>([]);
@@ -41,7 +42,15 @@ export function HomePage() {
               </Link>
             </div>
           </div>
-          <div className="db-hero__panel" aria-hidden>
+          <div
+            className="db-hero__panel"
+            aria-hidden
+            style={{
+              backgroundImage: `linear-gradient(rgba(20, 40, 63, 0.25), rgba(20, 40, 63, 0.15)), url(${heroImage})`,
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+            }}
+          >
             <div className="db-hero__orb" />
             <ul className="db-hero__chips">
               <li>Tretmani lica</li>

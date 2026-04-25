@@ -1,22 +1,66 @@
 import { useEffect, useState } from 'react';
 import type { GalleryItem, Review } from '@salon/shared';
-import { loadGallery, loadReviews } from '@/services/api';
+import { loadReviews } from '@/services/api';
 import { loadLocalReviews, mergeReviews } from '@/lib/localReviews';
 import { ReviewForm } from '@/components/reviews/ReviewForm';
 import { StarRating } from '@/components/reviews/StarRating';
+import imgDeepBlue from '@/assets/images/DEEP BLUE.jpg';
+import imgMadero1 from '@/assets/images/MADEROTERAPIJA 1.jpg';
+import imgMadero2 from '@/assets/images/MADEROTERAPIJA 2.jpeg';
+import imgLice from '@/assets/images/MADEROTERAPIJA LICA 1.jpeg';
+import imgUzv from '@/assets/images/ULTRAZVUK LICA.jpeg';
+import imgWax from '@/assets/images/ITALWAX VRUĆI VOSAK NOGE.jpg';
 
 function sortByDateDesc(a: Review, b: Review) {
   return b.date.localeCompare(a.date);
 }
 
+const localGalleryItems: GalleryItem[] = [
+  {
+    id: 'l-1',
+    title: 'DEEP BLUE salon',
+    imageUrl: imgDeepBlue,
+    caption: 'Interijer salona DEEP BLUE u Zadru.',
+  },
+  {
+    id: 'l-2',
+    title: 'Maderoterapija',
+    imageUrl: imgMadero1,
+    caption: 'Body shaping tretmani i anticelulitni protokoli.',
+  },
+  {
+    id: 'l-3',
+    title: 'Maderoterapija — detalj',
+    imageUrl: imgMadero2,
+    caption: 'Profesionalan pristup i individualna prilagodba tretmana.',
+  },
+  {
+    id: 'l-4',
+    title: 'Maderoterapija lica',
+    imageUrl: imgLice,
+    caption: 'Tretmani lica za tonus, cirkulaciju i svjez izgled koze.',
+  },
+  {
+    id: 'l-5',
+    title: 'Ultrazvuk lica',
+    imageUrl: imgUzv,
+    caption: 'Njega lica ultrazvukom i dubinska njega koze.',
+  },
+  {
+    id: 'l-6',
+    title: 'Depilacija Italwax',
+    imageUrl: imgWax,
+    caption: 'Depilacija nogu uz profesionalne Italwax proizvode.',
+  },
+];
+
 export function GalleryPage() {
-  const [items, setItems] = useState<GalleryItem[]>([]);
+  const [items] = useState<GalleryItem[]>(localGalleryItems);
   const [reviews, setReviews] = useState<Review[]>([]);
 
   useEffect(() => {
     const local = loadLocalReviews();
-    void Promise.all([loadGallery(), loadReviews()]).then(([g, r]) => {
-      setItems(g);
+    void loadReviews().then((r) => {
       setReviews(mergeReviews(r, local).sort(sortByDateDesc));
     });
   }, []);
@@ -30,8 +74,7 @@ export function GalleryPage() {
       <header className="db-page__head">
         <h1 className="db-page__title">Galerija</h1>
         <p className="db-page__lead">
-          Pregled atmosfere i usluga (demo slike). Ispod možete ostaviti ocjenu i tekstualnu recenziju — idealno za
-          prezentaciju klijentu.
+          Pregled stvarnih fotografija salona i tretmana. Ispod mozete ostaviti ocjenu i tekstualnu recenziju.
         </p>
       </header>
 
