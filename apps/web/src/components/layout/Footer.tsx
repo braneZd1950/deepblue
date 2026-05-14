@@ -86,16 +86,11 @@ export function Footer() {
           </nav>
           <span className="db-footer__copy">
             © {new Date().getFullYear()} {brand.domain} —{' '}
-            {import.meta.env.PROD ? L.footer.copyProd : L.footer.copyDev}
-            {!import.meta.env.PROD && (
-              <>
-                {' '}
-                {L.footer.developerLabel}{' '}
-                <a href="mailto:banbranimir@outlook.com" className="db-footer__copy-dev">
-                  banbranimir@outlook.com
-                </a>
-              </>
-            )}
+            {import.meta.env.PROD ? L.footer.copyProd : L.footer.copyDev}{' '}
+            {L.footer.developerLabel}{' '}
+            <a href="mailto:banbranimir@outlook.com" className="db-footer__copy-dev">
+              banbranimir@outlook.com
+            </a>
           </span>
         </div>
       </div>

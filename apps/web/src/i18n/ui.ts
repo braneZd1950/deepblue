@@ -213,7 +213,7 @@ export const UI: Record<AppLocale, UiBundle> = {
       legalNav: 'Pravne informacije',
       copyProd: 'informacijska stranica salona.',
       copyDev: 'demonstracijska verzija (mock podaci, bez produkcijskog API-ja).',
-      developerLabel: 'Razvoj stranice:',
+      developerLabel: 'Izradio:',
     },
     cookieBanner: {
       aria: 'Obavijest o kolačićima',
@@ -373,7 +373,7 @@ export const UI: Record<AppLocale, UiBundle> = {
       legalNav: 'Legal information',
       copyProd: 'salon information website.',
       copyDev: 'demo build (mock data, no production API).',
-      developerLabel: 'Site development:',
+      developerLabel: 'Developed by',
     },
     cookieBanner: {
       aria: 'Cookie notice',
