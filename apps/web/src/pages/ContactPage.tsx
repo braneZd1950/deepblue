@@ -18,8 +18,9 @@ export function ContactPage() {
       <header className="db-page__head">
         <h1 className="db-page__title">Kontakt</h1>
         <p className="db-page__lead">
-          Svi podaci dolaze iz konfiguracije brenda (white-label). Za demo možete odmah otvoriti kartu, poziv ili
-          WhatsApp.
+          {import.meta.env.PROD
+            ? 'Svi podaci dolaze iz konfiguracije salona. Za termin najbrže koristite WhatsApp, email ili telefon.'
+            : 'Svi podaci dolaze iz konfiguracije brenda (white-label). Za demo možete odmah otvoriti kartu, poziv ili WhatsApp.'}
         </p>
       </header>
 
@@ -84,8 +85,9 @@ export function ContactPage() {
             Sljedeći koraci
           </h2>
           <p className="db-contact__text">
-            Online rezervacija u demo verziji može koristiti mock termine; za stvarni termin najbrže je nazvati ili
-            napisati na WhatsApp.
+            {import.meta.env.PROD
+              ? 'Na stranici Rezervacije odaberete uslugu i željeni prikaz termina, zatim iste podatke pošaljete putem WhatsAppa ili emaila kako bi salon potvrdio termin.'
+              : 'Online rezervacija u demo verziji može koristiti mock termine; za stvarni termin najbrže je nazvati ili napisati na WhatsApp.'}
           </p>
           <div className="db-contact__actions">
             <Link to="/rezervacije" className="db-btn db-btn--accent">

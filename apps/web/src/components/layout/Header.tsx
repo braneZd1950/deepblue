@@ -7,7 +7,7 @@ const linkClass = ({ isActive }: { isActive: boolean }) =>
 
 const navItems: { to: string; label: string }[] = [
   { to: '/', label: 'Početna' },
-  //{ to: '/rezervacije', label: 'Rezervacije' },
+  { to: '/rezervacije', label: 'Rezervacije' },
   { to: '/cjenik', label: 'Cjenik' },
   { to: '/galerija', label: 'Galerija' },
   { to: '/kontakt', label: 'Kontakt' },

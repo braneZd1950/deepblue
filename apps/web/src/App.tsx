@@ -1,7 +1,7 @@
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import { MainLayout } from '@/components/layout/MainLayout';
 import { HomePage } from '@/pages/HomePage';
-//import { BookingPage } from '@/pages/BookingPage';
+import { BookingPage } from '@/pages/BookingPage';
 import { PricelistPage } from '@/pages/PricelistPage';
 import { GalleryPage } from '@/pages/GalleryPage';
 //import { ProfilePage } from '@/pages/ProfilePage';
@@ -16,7 +16,7 @@ export default function App() {
       <Routes>
         <Route element={<MainLayout />}>
           <Route path="/" element={<HomePage />} />
-         {/*} <Route path="/rezervacije" element={<BookingPage />} /> */}
+          <Route path="/rezervacije" element={<BookingPage />} />
           <Route path="/cjenik" element={<PricelistPage />} />
           <Route path="/galerija" element={<GalleryPage />} />
           <Route path="/kontakt" element={<ContactPage />} />

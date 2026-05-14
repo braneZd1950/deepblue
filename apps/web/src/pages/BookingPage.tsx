@@ -10,6 +10,8 @@ import { CustomSelect } from '@/components/ui/CustomSelect';
 
 type Panel = 'form' | 'success';
 
+const isProdBuild = import.meta.env.PROD;
+
 function waWithText(baseUrl: string, text: string): string {
   try {
     const u = new URL(baseUrl);
@@ -76,8 +78,13 @@ export function BookingPage() {
 
   async function onSubmit(e: FormEvent) {
     e.preventDefault();
-    setLoading(true);
     setMessage(null);
+    if (isProdBuild) {
+      setSuccessFromApi(false);
+      setPanel('success');
+      return;
+    }
+    setLoading(true);
     const res = await submitBooking({ serviceId, slotId, name, email });
     setLoading(false);
     if (res.ok) {
@@ -101,9 +108,11 @@ export function BookingPage() {
         <header className="db-page__head">
           <h1 className="db-page__title">Rezervacija — potvrda</h1>
           <p className="db-page__lead">
-            {successFromApi
-              ? 'Zahtjev je zaprimljen (API u demo okruženju). U produkciji slijedi email ili SMS potvrda.'
-              : 'Ovo je ekran potvrde za prezentaciju klijenta (bez slanja na server).'}
+            {isProdBuild
+              ? 'Sljedeći korak: pošaljite iste podatke putem WhatsAppa ili emaila kako bi salon potvrdio termin.'
+              : successFromApi
+                ? 'Zahtjev je zaprimljen (API u demo okruženju). U produkciji slijedi email ili SMS potvrda.'
+                : 'Ovo je ekran potvrde za prezentaciju klijenta (bez slanja na server).'}
           </p>
         </header>
 
@@ -121,7 +130,9 @@ export function BookingPage() {
             </li>
           </ul>
           <p className="db-booking-success__hint">
-            Za stvarnu potvrdu termina najčešće je najbrže nazvati salon ili poslati poruku na WhatsApp.
+            {isProdBuild
+              ? 'Termin nije rezerviran dok ga salon ne potvrdi odgovorom na vašu poruku ili pozivom.'
+              : 'Za stvarnu potvrdu termina najčešće je najbrže nazvati salon ili poslati poruku na WhatsApp.'}
           </p>
           <div className="db-booking-success__actions">
             <a href={telHref(brand.contact.phone)} className="db-btn db-btn--accent">
@@ -152,8 +163,9 @@ export function BookingPage() {
       <header className="db-page__head">
         <h1 className="db-page__title">Rezervacije</h1>
         <p className="db-page__lead">
-          Odaberite uslugu i termin iz demo liste. Ako backend nije pokrenut, slanje na API neće uspjeti — u tom
-          slučaju koristite kontakt ili gumb za prikaz ekrana potvrde (demo).
+          {isProdBuild
+            ? 'Odaberite uslugu i željeni termin (informativni prikaz), upišite kontakt, zatim pošaljite upit putem WhatsAppa ili emaila. Bez backenda — dogovor ide izravno sa salonom.'
+            : 'Odaberite uslugu i termin iz demo liste. Ako backend nije pokrenut, slanje na API neće uspjeti — u tom slučaju koristite kontakt ili gumb za prikaz ekrana potvrde (demo).'}
         </p>
       </header>
 
@@ -215,11 +227,13 @@ export function BookingPage() {
 
         <div className="db-booking__submit-row">
           <Button type="submit" variant="accent" disabled={loading}>
-            {loading ? 'Slanje…' : 'Pošalji zahtjev'}
+            {loading ? 'Slanje…' : isProdBuild ? 'Nastavi na kontakt' : 'Pošalji zahtjev'}
           </Button>
-          <Button type="button" variant="outline" onClick={showDemoSuccess}>
-            Demo: ekran potvrde
-          </Button>
+          {!isProdBuild && (
+            <Button type="button" variant="outline" onClick={showDemoSuccess}>
+              Demo: ekran potvrde
+            </Button>
+          )}
         </div>
       </form>
 

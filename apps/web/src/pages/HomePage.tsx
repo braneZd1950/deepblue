@@ -26,9 +26,20 @@ export function HomePage() {
             <p className="db-hero__lead">
               U toplom ambijentu salona {brand.name} u Zadru dočekat će vas vedar tim kozmetičarki i wellness
               terapeuta — iskustvo stečeno u renomiranim salonima i luksuznim hotelima. Preporučujemo usluge i
-              preparate prilagođene vama. Za akcije pratite nas na društvenim mrežama. Ova je{' '}
-              <strong>demonstracijska verzija</strong> stranice: rezervacije, recenzije i cjenik koriste demo podatke;
-              točne cijene i termine potvrdite u salonu ili na {brand.domain}.
+              preparate prilagođene vama. Za akcije pratite nas na društvenim mrežama.
+              {import.meta.env.PROD ? (
+                <>
+                  {' '}
+                  Rezervacija termina ide putem <strong>WhatsAppa ili emaila</strong>; cjenik na stranici je
+                  informativan — točne cijene i raspoloživost potvrdite izravno u salonu.
+                </>
+              ) : (
+                <>
+                  {' '}
+                  Ova je <strong>demonstracijska verzija</strong> stranice: rezervacije, recenzije i cjenik koriste
+                  demo podatke; točne cijene i termine potvrdite u salonu ili na {brand.domain}.
+                </>
+              )}
             </p>
             <div className="db-hero__actions">
               <Link to="/rezervacije" className="db-btn db-btn--accent">

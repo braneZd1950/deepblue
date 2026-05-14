@@ -15,7 +15,7 @@ function sortByDateDesc(a: Review, b: Review) {
   return b.date.localeCompare(a.date);
 }
 
-const localGalleryItems: GalleryItem[] = [
+const curatedGalleryItems: GalleryItem[] = [
   {
     id: 'l-1',
     title: 'DEEP BLUE salon',
@@ -54,16 +54,50 @@ const localGalleryItems: GalleryItem[] = [
   },
 ];
 
+function waSortKey(path: string): number {
+  const m = path.match(/WA(\d+)/i);
+  return m ? parseInt(m[1], 10) : 0;
+}
+
+/** Sve JPG slike iz `assets/images/deepBlueGal` (Vite glob — bez ručnog popisa). */
+function deepBlueGalItems(): GalleryItem[] {
+  const modules = import.meta.glob<string>('../assets/images/deepBlueGal/*.jpg', {
+    eager: true,
+    import: 'default',
+  });
+
+  return Object.entries(modules)
+    .sort((a, b) => waSortKey(a[0]) - waSortKey(b[0]))
+    .map(([path, url]) => {
+      const wa = path.match(/WA(\d+)/i)?.[1] ?? path;
+      return {
+        id: `dbg-wa-${wa}`,
+        title: 'Galerija',
+        caption: '',
+        imageUrl: url,
+      };
+    });
+}
+
+const localGalleryItems: GalleryItem[] = [...curatedGalleryItems, ...deepBlueGalItems()];
+
+/** Jedinstveni `alt` za sve slike u mreži (bez vidljivog naslova/opisa ispod slike). */
+const galleryGridImageAlt = 'Fotografija iz galerije salona DEEP BLUE, Zadar.';
+
+/** U produkcijskom buildu recenzije su skrivene dok nema pouzdanog API-ja. */
+const showGalleryReviews = !import.meta.env.PROD;
+
 export function GalleryPage() {
   const [items] = useState<GalleryItem[]>(localGalleryItems);
   const [reviews, setReviews] = useState<Review[]>([]);
 
   useEffect(() => {
+    if (!showGalleryReviews) return;
     const local = loadLocalReviews();
     void loadReviews().then((r) => {
       setReviews(mergeReviews(r, local).sort(sortByDateDesc));
     });
-  }, []);
+  }, [showGalleryReviews]);
 
   const onReviewAdded = (r: Review) => {
     setReviews((prev) => mergeReviews(prev, [r]).sort(sortByDateDesc));
@@ -74,44 +108,44 @@ export function GalleryPage() {
       <header className="db-page__head">
         <h1 className="db-page__title">Galerija</h1>
         <p className="db-page__lead">
-          Pregled stvarnih fotografija salona i tretmana. Ispod mozete ostaviti ocjenu i tekstualnu recenziju.
+          {showGalleryReviews
+            ? 'Pregled stvarnih fotografija salona i tretmana. Ispod možete ostaviti ocjenu i tekstualnu recenziju.'
+            : 'Pregled stvarnih fotografija salona i tretmana.'}
         </p>
       </header>
 
       <div className="db-gallery">
         {items.map((g) => (
           <figure key={g.id} className="db-gallery__item">
-            <img src={g.imageUrl} alt={g.title} loading="lazy" />
-            <figcaption>
-              <strong>{g.title}</strong>
-              <span>{g.caption}</span>
-            </figcaption>
+            <img src={g.imageUrl} alt={galleryGridImageAlt} loading="lazy" />
           </figure>
         ))}
       </div>
 
-      <section className="db-reviews" aria-labelledby="reviews-heading">
-        <h2 id="reviews-heading" className="db-reviews__title">
-          Recenzije
-        </h2>
+      {showGalleryReviews && (
+        <section className="db-reviews" aria-labelledby="reviews-heading">
+          <h2 id="reviews-heading" className="db-reviews__title">
+            Recenzije
+          </h2>
 
-        <ReviewForm onAdded={onReviewAdded} />
+          <ReviewForm onAdded={onReviewAdded} />
 
-        <div className="db-reviews__grid">
-          {reviews.map((r) => (
-            <blockquote key={r.id} className="db-review">
-              <StarRating value={r.rating} />
-              <p className="db-review__text">“{r.text}”</p>
-              <footer>
-                — {r.author}, {r.date}
-                {r.id.startsWith('demo-') && (
-                  <span className="db-review__badge"> Vaša (demo)</span>
-                )}
-              </footer>
-            </blockquote>
-          ))}
-        </div>
-      </section>
+          <div className="db-reviews__grid">
+            {reviews.map((r) => (
+              <blockquote key={r.id} className="db-review">
+                <StarRating value={r.rating} />
+                <p className="db-review__text">“{r.text}”</p>
+                <footer>
+                  — {r.author}, {r.date}
+                  {r.id.startsWith('demo-') && (
+                    <span className="db-review__badge"> Vaša (demo)</span>
+                  )}
+                </footer>
+              </blockquote>
+            ))}
+          </div>
+        </section>
+      )}
     </div>
   );
 }
