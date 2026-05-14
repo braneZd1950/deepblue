@@ -23,12 +23,77 @@
   box-shadow: var(--shadow-sm);
 }
 
+.db-pricelist__list--wax {
+  overflow-x: auto;
+}
+
 .db-pricelist__row {
   display: flex;
   gap: 1rem;
   justify-content: space-between;
+  align-items: flex-start;
   padding: 1rem 1.15rem;
   border-bottom: 1px solid var(--color-line);
+}
+
+.db-pricelist__row--wax {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 4.25rem 4.25rem;
+  gap: 0.75rem 1rem;
+  align-items: baseline;
+}
+
+.db-pricelist__row--wax-head {
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--color-text-muted);
+  background: var(--color-secondary-light);
+}
+
+.db-pricelist__row--wax-head .db-pricelist__wax-m,
+.db-pricelist__row--wax-head .db-pricelist__wax-z {
+  text-align: right;
+  font-weight: 600;
+}
+
+.db-pricelist__wax-service {
+  min-width: 0;
+}
+
+.db-pricelist__wax-m,
+.db-pricelist__wax-z {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+.db-pricelist__wax-price {
+  font-weight: 700;
+  color: var(--color-accent);
+  font-size: 0.95rem;
+}
+
+.db-pricelist__row--wax .db-pricelist__main {
+  grid-column: 1;
+  min-width: 0;
+}
+
+.db-pricelist__row--wax .db-pricelist__wax-m.db-pricelist__wax-price {
+  grid-column: 2;
+}
+
+.db-pricelist__row--wax .db-pricelist__wax-z.db-pricelist__wax-price {
+  grid-column: 3;
+}
+
+.db-pricelist__row--gift .db-pricelist__meta {
+  align-self: center;
+}
+
+.db-pricelist__main {
+  flex: 1;
+  min-width: 0;
 }
 
 .db-pricelist__row:last-child {

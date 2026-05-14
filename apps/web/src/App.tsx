@@ -1,4 +1,5 @@
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
+import { LocaleProvider } from '@/i18n/LocaleContext';
 import { MainLayout } from '@/components/layout/MainLayout';
 import { HomePage } from '@/pages/HomePage';
 import { BookingPage } from '@/pages/BookingPage';
@@ -13,7 +14,8 @@ import { ContactPage } from '@/pages/ContactPage';
 export default function App() {
   return (
     <BrowserRouter>
-      <Routes>
+      <LocaleProvider>
+        <Routes>
         <Route element={<MainLayout />}>
           <Route path="/" element={<HomePage />} />
           <Route path="/rezervacije" element={<BookingPage />} />
@@ -26,7 +28,8 @@ export default function App() {
           <Route path="/kolacici" element={<CookiesPage />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Route>
-      </Routes>
+        </Routes>
+      </LocaleProvider>
     </BrowserRouter>
   );
 }

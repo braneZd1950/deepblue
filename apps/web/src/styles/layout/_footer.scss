@@ -122,6 +122,18 @@
   min-width: min(100%, 16rem);
 }
 
+.db-footer__copy-dev {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  text-decoration-color: rgba(255, 255, 255, 0.35);
+}
+
+.db-footer__copy-dev:hover {
+  color: var(--color-accent-soft);
+  text-decoration-color: var(--color-accent-soft);
+}
+
 @media (max-width: 640px) {
   .db-footer__copy {
     text-align: left;

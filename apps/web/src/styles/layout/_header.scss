@@ -42,6 +42,14 @@
   width: 100%;
   position: relative;
   z-index: 1;
+  min-width: 0;
+}
+
+.db-header__toolbar {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  flex-shrink: 0;
 }
 
 .db-nav-toggle {
@@ -322,6 +330,8 @@
   .db-header__bar {
     width: auto;
     z-index: auto;
+    flex: 1 1 auto;
+    min-width: 0;
   }
 
   .db-nav {

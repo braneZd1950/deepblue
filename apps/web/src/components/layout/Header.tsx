@@ -1,18 +1,11 @@
-import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 import { brand } from '@/config/brand';
+import { useLocale } from '@/i18n/LocaleContext';
+import { LanguageToggle } from '@/components/LanguageToggle';
 
 const linkClass = ({ isActive }: { isActive: boolean }) =>
   `db-nav__link${isActive ? ' db-nav__link--active' : ''}`;
-
-const navItems: { to: string; label: string }[] = [
-  { to: '/', label: 'Početna' },
-  { to: '/rezervacije', label: 'Rezervacije' },
-  { to: '/cjenik', label: 'Cjenik' },
-  { to: '/galerija', label: 'Galerija' },
-  { to: '/kontakt', label: 'Kontakt' },
-  //{ to: '/profil', label: 'Profil' }, 
-];
 
 const MQ_MOBILE = '(max-width: 768px)';
 
@@ -21,12 +14,23 @@ function isMobileNav(): boolean {
 }
 
 export function Header() {
-  const location = useLocation();
+  const { pathname } = useLocation();
+  const { L } = useLocale();
   const headerRef = useRef<HTMLElement>(null);
   const toggleRef = useRef<HTMLButtonElement>(null);
   const [menuOpen, setMenuOpen] = useState(false);
 
-  // Donji rub <header> u viewportu → backdrop top = točno do zaglavlja (bez preklapanja).
+  const navItems = useMemo(
+    () => [
+      { to: '/', label: L.nav.home },
+      { to: '/rezervacije', label: L.nav.booking },
+      { to: '/cjenik', label: L.nav.pricelist },
+      { to: '/galerija', label: L.nav.gallery },
+      { to: '/kontakt', label: L.nav.contact },
+    ],
+    [L],
+  );
+
   useLayoutEffect(() => {
     const header = headerRef.current;
     if (!header) return;
@@ -60,7 +64,7 @@ export function Header() {
   useLayoutEffect(() => {
     setMenuOpen(false);
     document.documentElement.classList.remove('db-nav-open');
-  }, [location.pathname]);
+  }, [pathname]);
 
   useEffect(() => {
     function onResize() {
@@ -126,30 +130,33 @@ export function Header() {
               <span className="db-brand__tag">{brand.tagline}</span>
             </span>
           </NavLink>
-          <button
-            ref={toggleRef}
-            type="button"
-            className="db-nav-toggle"
-            aria-expanded={menuOpen}
-            aria-controls="db-main-nav"
-            aria-label={menuOpen ? 'Zatvori izbornik' : 'Otvori izbornik'}
-            onClick={() => {
-              setMenuOpen((o) => {
-                const next = !o;
-                if (!next) document.documentElement.classList.remove('db-nav-open');
-                return next;
-              });
-            }}
-          >
-            <span className="db-nav-toggle__bars" aria-hidden="true" />
-          </button>
+          <div className="db-header__toolbar">
+            <LanguageToggle />
+            <button
+              ref={toggleRef}
+              type="button"
+              className="db-nav-toggle"
+              aria-expanded={menuOpen}
+              aria-controls="db-main-nav"
+              aria-label={menuOpen ? L.navToggle.close : L.navToggle.open}
+              onClick={() => {
+                setMenuOpen((o) => {
+                  const next = !o;
+                  if (!next) document.documentElement.classList.remove('db-nav-open');
+                  return next;
+                });
+              }}
+            >
+              <span className="db-nav-toggle__bars" aria-hidden="true" />
+            </button>
+          </div>
         </div>
 
         {menuOpen && (
           <button
             type="button"
             className="db-header__backdrop"
-            aria-label="Zatvori izbornik"
+            aria-label={L.navToggle.backdrop}
             tabIndex={-1}
             onClick={closeMenuAndFocusToggle}
           />
@@ -158,7 +165,7 @@ export function Header() {
         <nav
           id="db-main-nav"
           className="db-nav"
-          aria-label="Glavna navigacija"
+          aria-label={L.nav.ariaMain}
           aria-hidden={isMobileNav() ? !menuOpen : undefined}
         >
           {navItems.map(({ to, label }) => (

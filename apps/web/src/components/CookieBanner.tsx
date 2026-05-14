@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useLocale } from '@/i18n/LocaleContext';
 
 const STORAGE_KEY = 'deepblue_cookie_consent';
 
@@ -29,6 +30,7 @@ export function setCookieConsent(value: CookieConsent) {
 }
 
 export function CookieBanner() {
+  const { L } = useLocale();
   const [visible, setVisible] = useState(shouldShowBanner);
 
   useEffect(() => {
@@ -49,29 +51,24 @@ export function CookieBanner() {
   if (!visible) return null;
 
   return (
-    <div
-      className="db-cookie-banner"
-      role="region"
-      aria-label="Obavijest o kolačićima"
-    >
+    <div className="db-cookie-banner" role="region" aria-label={L.cookieBanner.aria}>
       <div className="db-cookie-banner__inner db-shell">
         <div className="db-cookie-banner__text">
-          <p className="db-cookie-banner__title">Kolačići</p>
+          <p className="db-cookie-banner__title">{L.cookieBanner.title}</p>
           <p className="db-cookie-banner__desc">
-            Koristimo kolačiće radi osnovnog rada stranice i — uz vašu suglasnost — za analitiku i
-            poboljšanje iskustva. Više u{' '}
+            {L.cookieBanner.desc}{' '}
             <Link to="/kolacici" className="db-cookie-banner__link">
-              politici kolačića
+              {L.cookieBanner.link}
             </Link>
             .
           </p>
         </div>
         <div className="db-cookie-banner__actions">
           <button type="button" className="db-cookie-banner__btn db-cookie-banner__btn--ghost" onClick={essentialOnly}>
-            Samo nužni
+            {L.cookieBanner.essential}
           </button>
           <button type="button" className="db-cookie-banner__btn db-cookie-banner__btn--primary" onClick={acceptAll}>
-            Prihvati sve
+            {L.cookieBanner.all}
           </button>
         </div>
       </div>

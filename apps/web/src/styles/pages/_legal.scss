@@ -23,6 +23,13 @@
   color: var(--color-text-muted);
 }
 
+.db-legal__updated {
+  margin: 0.75rem 0 0;
+  font-size: 0.82rem;
+  color: var(--color-text-muted);
+  font-variant-numeric: tabular-nums;
+}
+
 .db-legal__content {
   max-width: 65ch;
   color: var(--color-text);
@@ -35,4 +42,20 @@
 
 .db-legal__content p:last-child {
   margin-bottom: 0;
+}
+
+.db-legal__section {
+  margin-bottom: 1.75rem;
+}
+
+.db-legal__section:last-child {
+  margin-bottom: 0;
+}
+
+.db-legal__h2 {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  margin: 0 0 0.65rem;
+  color: var(--color-primary);
+  font-weight: 600;
 }

@@ -7,6 +7,7 @@ import { mailtoBooking, telHref } from '@/lib/contactLinks';
 import { loadServices, loadSlots, submitBooking } from '@/services/api';
 import { Button } from '@/components/ui/Button';
 import { CustomSelect } from '@/components/ui/CustomSelect';
+import { useLocale } from '@/i18n/LocaleContext';
 
 type Panel = 'form' | 'success';
 
@@ -23,6 +24,7 @@ function waWithText(baseUrl: string, text: string): string {
 }
 
 export function BookingPage() {
+  const { L, locale } = useLocale();
   const [services, setServices] = useState<ServiceItem[]>([]);
   const [slots, setSlots] = useState<BookingSlot[]>([]);
   const [serviceId, setServiceId] = useState('');
@@ -48,27 +50,25 @@ export function BookingPage() {
   const slot = useMemo(() => slots.find((b) => b.id === slotId), [slots, slotId]);
 
   const summaryLines = useMemo(() => {
-    const lines = [
-      'Poštovani,',
+    const dash = '—';
+    return [
+      L.booking.mailHello,
       '',
-      `Željena usluga: ${service?.name ?? '—'}`,
-      `Termin: ${slot ? `${slot.date} ${slot.time}` : '—'}`,
-      `Kontakt: ${name}, ${email}`,
+      `${L.booking.mailService} ${service?.name ?? dash}`,
+      `${L.booking.mailSlot} ${slot ? `${slot.date} ${slot.time}` : dash}`,
+      `${L.booking.mailContact} ${name}, ${email}`,
       '',
-      'Molim potvrdu termina.',
+      L.booking.mailClosing,
     ];
-    return lines;
-  }, [service, slot, name, email]);
+  }, [L.booking, service, slot, name, email]);
 
-  const mailHref = useMemo(() => mailtoBooking(brand, summaryLines), [summaryLines]);
+  const mailHref = useMemo(() => mailtoBooking(brand, summaryLines), [brand, summaryLines]);
 
   const waHref = useMemo(() => {
     if (!brand.social?.whatsapp) return null;
-    return waWithText(
-      brand.social.whatsapp,
-      `Bok, želim rezervirati: ${service?.name ?? 'usluga'}, termin ${slot ? `${slot.date} ${slot.time}` : '—'}. ${name}`,
-    );
-  }, [service, slot, name]);
+    const body = `${L.booking.waIntro} ${service?.name ?? '—'}${slot ? `, ${slot.date} ${slot.time}` : ''}. ${name}`;
+    return waWithText(brand.social.whatsapp, body);
+  }, [brand.social?.whatsapp, service, slot, name, L.booking]);
 
   function resetFlow() {
     setPanel('form');
@@ -93,7 +93,7 @@ export function BookingPage() {
       setMessage(null);
       return;
     }
-    setMessage(res.message ?? 'Greška');
+    setMessage(res.message ?? L.booking.errorGeneric);
   }
 
   function showDemoSuccess() {
@@ -102,80 +102,84 @@ export function BookingPage() {
     setMessage(null);
   }
 
+  const namePh = locale === 'en' ? 'Jane Doe' : 'Ana Anić';
+  const emailPh = locale === 'en' ? 'jane@example.com' : 'ana@primjer.hr';
+
   if (panel === 'success') {
     return (
       <div className="db-shell db-page">
         <header className="db-page__head">
-          <h1 className="db-page__title">Rezervacija — potvrda</h1>
+          <h1 className="db-page__title">{L.booking.altTitle}</h1>
           <p className="db-page__lead">
             {isProdBuild
-              ? 'Sljedeći korak: pošaljite iste podatke putem WhatsAppa ili emaila kako bi salon potvrdio termin.'
+              ? L.booking.successLeadProd
               : successFromApi
-                ? 'Zahtjev je zaprimljen (API u demo okruženju). U produkciji slijedi email ili SMS potvrda.'
-                : 'Ovo je ekran potvrde za prezentaciju klijenta (bez slanja na server).'}
+                ? L.booking.successLeadApi
+                : L.booking.successLeadDemo}
           </p>
         </header>
 
         <div className="db-booking-success">
-          <p className="db-booking-success__greet">Hvala, {name || 'goste'}.</p>
+          <p className="db-booking-success__greet">
+            {L.booking.thankYou}, {name || L.booking.guest}.
+          </p>
           <ul className="db-booking-success__list">
             <li>
-              <strong>Usluga:</strong> {service?.name}
+              <strong>{L.booking.serviceLabel}</strong> {service?.name}
             </li>
             <li>
-              <strong>Termin:</strong> {slot ? `${slot.date} ${slot.time}` : '—'}
+              <strong>{L.booking.slotLabel}</strong> {slot ? `${slot.date} ${slot.time}` : '—'}
             </li>
             <li>
-              <strong>Email:</strong> {email}
+              <strong>{L.booking.emailLabel}</strong> {email}
             </li>
           </ul>
-          <p className="db-booking-success__hint">
-            {isProdBuild
-              ? 'Termin nije rezerviran dok ga salon ne potvrdi odgovorom na vašu poruku ili pozivom.'
-              : 'Za stvarnu potvrdu termina najčešće je najbrže nazvati salon ili poslati poruku na WhatsApp.'}
-          </p>
+          <p className="db-booking-success__hint">{isProdBuild ? L.booking.hintProd : L.booking.hintDev}</p>
           <div className="db-booking-success__actions">
             <a href={telHref(brand.contact.phone)} className="db-btn db-btn--accent">
-              Nazovi {brand.contact.phone}
+              {L.booking.call} {brand.contact.phone}
             </a>
             {waHref && (
               <a href={waHref} className="db-btn db-btn--ghost" target="_blank" rel="noopener noreferrer">
-                WhatsApp
+                {L.booking.whatsapp}
               </a>
             )}
             <a href={mailHref} className="db-btn db-btn--ghost">
-              Email upit
+              {L.booking.emailCta}
             </a>
             <Link to="/kontakt" className="db-btn db-btn--outline">
-              Stranica kontakt
+              {L.booking.contactPage}
             </Link>
           </div>
           <Button type="button" variant="ghost" onClick={resetFlow}>
-            Natrag na formu
+            {L.booking.backForm}
           </Button>
         </div>
       </div>
     );
   }
 
+  const msgErr =
+    message &&
+    (message.includes('Greška') ||
+      message.includes('nedostupan') ||
+      message.toLowerCase().includes('error') ||
+      message === L.booking.errorGeneric);
+
   return (
     <div className="db-shell db-page">
       <header className="db-page__head">
-        <h1 className="db-page__title">Rezervacije</h1>
-        <p className="db-page__lead">
-          {isProdBuild
-            ? 'Odaberite uslugu i željeni termin (informativni prikaz), upišite kontakt, zatim pošaljite upit putem WhatsAppa ili emaila. Bez backenda — dogovor ide izravno sa salonom.'
-            : 'Odaberite uslugu i termin iz demo liste. Ako backend nije pokrenut, slanje na API neće uspjeti — u tom slučaju koristite kontakt ili gumb za prikaz ekrana potvrde (demo).'}
-        </p>
+        <h1 className="db-page__title">{L.booking.title}</h1>
+        <p className="db-page__lead">{isProdBuild ? L.booking.leadProd : L.booking.leadDev}</p>
       </header>
 
       <form className="db-form" onSubmit={onSubmit}>
         <div className="db-field">
           <CustomSelect
-            label="Usluga"
+            label={L.booking.service}
             value={serviceId}
             required
-            placeholder="Odaberite uslugu"
+            placeholder={L.booking.selectService}
             options={services.map((s) => ({
               value: s.id,
               label: `${s.name} — ${s.priceEur} €`,
@@ -186,13 +190,13 @@ export function BookingPage() {
 
         <div className="db-field">
           <CustomSelect
-            label="Termin"
+            label={L.booking.slot}
             value={slotId}
             required
-            placeholder="Odaberite termin"
+            placeholder={L.booking.selectSlot}
             options={slots.map((b) => ({
               value: b.id,
-              label: `${b.date} ${b.time}${b.available ? '' : ' (zauzeto)'}`,
+              label: `${b.date} ${b.time}${b.available ? '' : ` ${L.booking.bookedLabel}`}`,
               disabled: !b.available,
             }))}
             onChange={setSlotId}
@@ -200,38 +204,26 @@ export function BookingPage() {
         </div>
 
         <label className="db-field">
-          <span>Ime i prezime</span>
-          <input value={name} onChange={(e) => setName(e.target.value)} required placeholder="Ana Anić" />
+          <span>{L.booking.name}</span>
+          <input value={name} onChange={(e) => setName(e.target.value)} required placeholder={namePh} />
         </label>
 
         <label className="db-field">
-          <span>Email</span>
-          <input
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-            placeholder="ana@primjer.hr"
-          />
+          <span>{L.booking.email}</span>
+          <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} required placeholder={emailPh} />
         </label>
 
         {message && (
-          <p
-            className={`db-form__msg${
-              message.includes('Greška') || message.includes('nedostupan') ? ' db-form__msg--err' : ''
-            }`}
-          >
-            {message}
-          </p>
+          <p className={`db-form__msg${msgErr ? ' db-form__msg--err' : ''}`}>{message}</p>
         )}
 
         <div className="db-booking__submit-row">
           <Button type="submit" variant="accent" disabled={loading}>
-            {loading ? 'Slanje…' : isProdBuild ? 'Nastavi na kontakt' : 'Pošalji zahtjev'}
+            {loading ? L.booking.loading : isProdBuild ? L.booking.submitProd : L.booking.submitDev}
           </Button>
           {!isProdBuild && (
             <Button type="button" variant="outline" onClick={showDemoSuccess}>
-              Demo: ekran potvrde
+              {L.booking.demoScreen}
             </Button>
           )}
         </div>
@@ -239,22 +231,22 @@ export function BookingPage() {
 
       <section className="db-booking__alt" aria-labelledby="booking-alt-title">
         <h2 id="booking-alt-title" className="db-booking__alt-title">
-          Ili odmah kontaktirajte salon
+          {L.booking.altContact}
         </h2>
         <div className="db-booking__alt-actions">
           <a href={telHref(brand.contact.phone)} className="db-btn db-btn--ghost">
-            Telefon
+            {L.booking.phone}
           </a>
           {waHref && (
             <a href={waHref} className="db-btn db-btn--ghost" target="_blank" rel="noopener noreferrer">
-              WhatsApp
+              {L.booking.whatsapp}
             </a>
           )}
           <a href={mailHref} className="db-btn db-btn--ghost">
-            Email s odabranim terminom
+            {L.booking.emailWithSlot}
           </a>
           <Link to="/kontakt" className="db-btn db-btn--ghost">
-            Kontakt
+            {L.nav.contact}
           </Link>
         </div>
       </section>

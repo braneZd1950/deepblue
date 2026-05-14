@@ -94,13 +94,13 @@
 }
 
 @media (max-width: 520px) {
-  .db-pricelist__row {
+  .db-pricelist__row:not(.db-pricelist__row--wax) {
     flex-direction: column;
     align-items: flex-start;
     gap: 0.65rem;
   }
 
-  .db-pricelist__meta {
+  .db-pricelist__row:not(.db-pricelist__row--wax) .db-pricelist__meta {
     text-align: left;
     white-space: normal;
     width: 100%;
@@ -108,6 +108,11 @@
     flex-wrap: wrap;
     align-items: center;
     gap: 0.5rem;
+  }
+
+  .db-pricelist__row--wax {
+    grid-template-columns: minmax(0, 1fr) 3.75rem 3.75rem;
+    gap: 0.5rem 0.35rem;
   }
 }
 

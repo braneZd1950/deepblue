@@ -3,9 +3,11 @@ import { Link } from 'react-router-dom';
 import type { ServiceItem } from '@salon/shared';
 import { loadServices } from '@/services/api';
 import { brand } from '@/config/brand';
+import { useLocale } from '@/i18n/LocaleContext';
 import heroImage from '@/assets/images/DEEP BLUE.jpg';
 
 export function HomePage() {
+  const { L, locale } = useLocale();
   const [services, setServices] = useState<ServiceItem[]>([]);
 
   useEffect(() => {
@@ -21,35 +23,46 @@ export function HomePage() {
           <div className="db-hero__copy">
             <p className="db-eyebrow">{brand.tagline}</p>
             <h1 className="db-hero__title">
-              Topao ambijent, <em>stručan tim</em>
+              {L.home.titleLine1} <em>{L.home.titleEm}</em>
             </h1>
             <p className="db-hero__lead">
-              U toplom ambijentu salona {brand.name} u Zadru dočekat će vas vedar tim kozmetičarki i wellness
-              terapeuta — iskustvo stečeno u renomiranim salonima i luksuznim hotelima. Preporučujemo usluge i
-              preparate prilagođene vama. Za akcije pratite nas na društvenim mrežama.
-              {import.meta.env.PROD ? (
+              {locale === 'hr' ? (
                 <>
-                  {' '}
-                  Rezervacija termina ide putem <strong>WhatsAppa ili emaila</strong>; cjenik na stranici je
-                  informativan — točne cijene i raspoloživost potvrdite izravno u salonu.
+                  U toplom ambijentu salona {brand.name} u Zadru dočekat će vas vedar tim kozmetičarki i wellness
+                  terapeuta — iskustvo stečeno u renomiranim salonima i luksuznim hotelima. Preporučujemo usluge i
+                  preparate prilagođene vama. Za akcije pratite nas na društvenim mrežama.{' '}
+                  {import.meta.env.PROD ? (
+                    <>{L.home.leadProd}</>
+                  ) : (
+                    <>
+                      <strong>demonstracijska verzija</strong> — {L.home.leadDev} {brand.domain}.
+                    </>
+                  )}
                 </>
               ) : (
                 <>
-                  {' '}
-                  Ova je <strong>demonstracijska verzija</strong> stranice: rezervacije, recenzije i cjenik koriste
-                  demo podatke; točne cijene i termine potvrdite u salonu ili na {brand.domain}.
+                  At {brand.name} in Zadar, a welcoming team of beauticians and wellness therapists awaits you —
+                  experience from renowned salons and luxury hotels. We recommend tailored services and products. Follow
+                  us on social media for promotions.{' '}
+                  {import.meta.env.PROD ? (
+                    <>{L.home.leadProd}</>
+                  ) : (
+                    <>
+                      This is a <strong>demo website</strong> — {L.home.leadDev} {brand.domain}.
+                    </>
+                  )}
                 </>
               )}
             </p>
             <div className="db-hero__actions">
               <Link to="/rezervacije" className="db-btn db-btn--accent">
-                Rezerviraj termin
+                {L.home.ctaBook}
               </Link>
               <Link to="/cjenik" className="db-btn db-btn--ghost">
-                Pogledaj cjenik
+                {L.home.ctaPrice}
               </Link>
               <Link to="/kontakt" className="db-btn db-btn--ghost">
-                Kontakt i lokacija
+                {L.home.ctaContact}
               </Link>
             </div>
           </div>
@@ -64,9 +77,9 @@ export function HomePage() {
           >
             <div className="db-hero__orb" />
             <ul className="db-hero__chips">
-              <li>Tretmani lica</li>
-              <li>Depilacija</li>
-              <li>Masaže & maderoterapija</li>
+              <li>{L.home.chipFace}</li>
+              <li>{L.home.chipWax}</li>
+              <li>{L.home.chipMassage}</li>
             </ul>
           </div>
         </div>
@@ -74,11 +87,14 @@ export function HomePage() {
 
       <section className="db-section db-shell">
         <div className="db-section__head">
-          <h2 className="db-section__title">Istaknute usluge</h2>
+          <h2 className="db-section__title">{L.home.sectionServices}</h2>
           <p className="db-section__sub">
-            Izdvojeno iz ponude salona. Na stranici <Link to="/galerija">Galerija</Link> možete ostaviti ocjenu i
-            recenziju (sprema se u pregledniku za demo). Cijene su okvirne — službeni cjenik na {brand.domain} je u
-            grafičkom obliku.
+            {L.home.featuredIntro}{' '}
+            <Link to="/galerija">{L.nav.gallery}</Link> {L.home.featuredAfterGallery}{' '}
+            <a href={`https://${brand.domain}`} target="_blank" rel="noopener noreferrer">
+              {brand.domain}
+            </a>
+            .
           </p>
         </div>
         <div className="db-card-grid">
@@ -86,7 +102,8 @@ export function HomePage() {
             <article key={s.id} className="db-card">
               <h3 className="db-card__title">{s.name}</h3>
               <p className="db-card__meta">
-                {s.durationMin} min · {s.priceEur} €
+                {s.durationMin > 0 ? `${s.durationMin} ${L.home.featuredDuration} · ` : null}
+                {s.priceEur} €
               </p>
               <p className="db-card__text">{s.description}</p>
             </article>

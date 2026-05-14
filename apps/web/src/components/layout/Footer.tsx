@@ -1,8 +1,11 @@
 import { Link } from 'react-router-dom';
 import { FacebookIcon, InstagramIcon, WhatsAppIcon } from '@/components/icons/SocialIcons';
 import { brand } from '@/config/brand';
+import { useLocale } from '@/i18n/LocaleContext';
 
 export function Footer() {
+  const { L } = useLocale();
+
   return (
     <footer className="db-footer">
       <div className="db-shell db-footer__grid">
@@ -11,7 +14,7 @@ export function Footer() {
           <p className="db-footer__muted">{brand.tagline}</p>
         </div>
         <div>
-          <p className="db-footer__label">Kontakt</p>
+          <p className="db-footer__label">{L.footer.contact}</p>
           <p>{brand.contact.phone}</p>
           <p>{brand.contact.email}</p>
           <p>
@@ -19,12 +22,12 @@ export function Footer() {
           </p>
           <p className="db-footer__kontakt-link">
             <Link to="/kontakt" className="db-footer__link">
-              Stranica kontakt i karta →
+              {L.footer.contactPage}
             </Link>
           </p>
         </div>
         <div>
-          <p className="db-footer__label">Društvene mreže</p>
+          <p className="db-footer__label">{L.footer.social}</p>
           <div className="db-footer__social">
             {brand.social?.instagram && (
               <a
@@ -64,25 +67,35 @@ export function Footer() {
       </div>
       <div className="db-shell db-footer__bottom">
         <div className="db-footer__bottom-inner">
-          <nav className="db-footer__legal" aria-label="Pravne informacije">
+          <nav className="db-footer__legal" aria-label={L.footer.legalNav}>
             <Link to="/pravila-privatnosti" className="db-footer__legal-link">
-              Politika privatnosti
+              {L.footer.privacy}
             </Link>
             <span className="db-footer__legal-sep" aria-hidden="true">
               ·
             </span>
             <Link to="/uvjeti-koristenja" className="db-footer__legal-link">
-              Uvjeti korištenja
+              {L.footer.terms}
             </Link>
             <span className="db-footer__legal-sep" aria-hidden="true">
               ·
             </span>
             <Link to="/kolacici" className="db-footer__legal-link">
-              Politika kolačića
+              {L.footer.cookies}
             </Link>
           </nav>
           <span className="db-footer__copy">
-            © {new Date().getFullYear()} {brand.domain} — demonstracijska verzija (mock podaci, bez produkcijskog API-ja).
+            © {new Date().getFullYear()} {brand.domain} —{' '}
+            {import.meta.env.PROD ? L.footer.copyProd : L.footer.copyDev}
+            {!import.meta.env.PROD && (
+              <>
+                {' '}
+                {L.footer.developerLabel}{' '}
+                <a href="mailto:banbranimir@outlook.com" className="db-footer__copy-dev">
+                  banbranimir@outlook.com
+                </a>
+              </>
+            )}
           </span>
         </div>
       </div>

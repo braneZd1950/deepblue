@@ -4,6 +4,7 @@ import { loadReviews } from '@/services/api';
 import { loadLocalReviews, mergeReviews } from '@/lib/localReviews';
 import { ReviewForm } from '@/components/reviews/ReviewForm';
 import { StarRating } from '@/components/reviews/StarRating';
+import { useLocale } from '@/i18n/LocaleContext';
 import imgDeepBlue from '@/assets/images/DEEP BLUE.jpg';
 import imgMadero1 from '@/assets/images/MADEROTERAPIJA 1.jpg';
 import imgMadero2 from '@/assets/images/MADEROTERAPIJA 2.jpeg';
@@ -59,7 +60,6 @@ function waSortKey(path: string): number {
   return m ? parseInt(m[1], 10) : 0;
 }
 
-/** Sve JPG slike iz `assets/images/deepBlueGal` (Vite glob — bez ručnog popisa). */
 function deepBlueGalItems(): GalleryItem[] {
   const modules = import.meta.glob<string>('../assets/images/deepBlueGal/*.jpg', {
     eager: true,
@@ -81,13 +81,10 @@ function deepBlueGalItems(): GalleryItem[] {
 
 const localGalleryItems: GalleryItem[] = [...curatedGalleryItems, ...deepBlueGalItems()];
 
-/** Jedinstveni `alt` za sve slike u mreži (bez vidljivog naslova/opisa ispod slike). */
-const galleryGridImageAlt = 'Fotografija iz galerije salona DEEP BLUE, Zadar.';
-
-/** U produkcijskom buildu recenzije su skrivene dok nema pouzdanog API-ja. */
 const showGalleryReviews = !import.meta.env.PROD;
 
 export function GalleryPage() {
+  const { L } = useLocale();
   const [items] = useState<GalleryItem[]>(localGalleryItems);
   const [reviews, setReviews] = useState<Review[]>([]);
 
@@ -106,18 +103,16 @@ export function GalleryPage() {
   return (
     <div className="db-shell db-page">
       <header className="db-page__head">
-        <h1 className="db-page__title">Galerija</h1>
+        <h1 className="db-page__title">{L.gallery.title}</h1>
         <p className="db-page__lead">
-          {showGalleryReviews
-            ? 'Pregled stvarnih fotografija salona i tretmana. Ispod možete ostaviti ocjenu i tekstualnu recenziju.'
-            : 'Pregled stvarnih fotografija salona i tretmana.'}
+          {showGalleryReviews ? L.gallery.leadDev : L.gallery.leadProd}
         </p>
       </header>
 
       <div className="db-gallery">
         {items.map((g) => (
           <figure key={g.id} className="db-gallery__item">
-            <img src={g.imageUrl} alt={galleryGridImageAlt} loading="lazy" />
+            <img src={g.imageUrl} alt={L.gallery.imageAlt} loading="lazy" />
           </figure>
         ))}
       </div>
@@ -125,7 +120,7 @@ export function GalleryPage() {
       {showGalleryReviews && (
         <section className="db-reviews" aria-labelledby="reviews-heading">
           <h2 id="reviews-heading" className="db-reviews__title">
-            Recenzije
+            {L.gallery.reviews}
           </h2>
 
           <ReviewForm onAdded={onReviewAdded} />
@@ -137,9 +132,7 @@ export function GalleryPage() {
                 <p className="db-review__text">“{r.text}”</p>
                 <footer>
                   — {r.author}, {r.date}
-                  {r.id.startsWith('demo-') && (
-                    <span className="db-review__badge"> Vaša (demo)</span>
-                  )}
+                  {r.id.startsWith('demo-') && <span className="db-review__badge"> {L.gallery.demoBadge}</span>}
                 </footer>
               </blockquote>
             ))}

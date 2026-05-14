@@ -1,11 +1,23 @@
-export type ServiceCategory = 'face' | 'body' | 'nails' | 'hair' | 'other';
+export type ServiceCategory =
+  | 'waxing'
+  | 'face'
+  | 'derma'
+  | 'madero'
+  | 'massage'
+  | 'body'
+  | 'nails'
+  | 'gift'
+  | 'other';
 
 export interface ServiceItem {
   id: string;
   name: string;
   category: ServiceCategory;
   durationMin: number;
+  /** Žene / jedinstvena cijena (kad nema stupca M). */
   priceEur: number;
+  /** Muškarci — samo za depilaciju (stupac M u cjeniku). */
+  priceEurMen?: number;
   description: string;
 }
 

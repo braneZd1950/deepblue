@@ -9,9 +9,12 @@ import {
   type BookingSlot,
 } from '@salon/shared';
 
-const base = import.meta.env.VITE_API_URL || 'http://localhost:4000';
+const envBase = (import.meta.env.VITE_API_URL as string | undefined)?.trim();
+/** U produkciji bez `VITE_API_URL` ne zovemo API — samo mock podaci u bundleu (čisti statični frontend). */
+const base = envBase || (import.meta.env.DEV ? 'http://localhost:4000' : '');
 
 async function safeJson<T>(path: string): Promise<T | null> {
+  if (!base) return null;
   try {
     const res = await fetch(`${base}${path}`);
     if (!res.ok) return null;
@@ -47,6 +50,9 @@ export async function submitBooking(payload: {
   name: string;
   email: string;
 }): Promise<{ ok: boolean; message?: string }> {
+  if (!base) {
+    return { ok: false, message: 'API nije konfiguriran (samo statični frontend).' };
+  }
   try {
     const res = await fetch(`${base}/api/bookings`, {
       method: 'POST',
