@@ -59,4 +59,6 @@ export interface SalonBrand {
     city: string;
   };
   social?: { instagram?: string; facebook?: string; whatsapp?: string };
+  /** Online rezervacija (npr. Fresha). */
+  onlineBooking?: { provider: 'fresha'; url: string };
 }

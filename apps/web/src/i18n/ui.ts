@@ -71,6 +71,11 @@ export type UiBundle = {
     title: string;
     leadProd: string;
     leadDev: string;
+    freshaTitle: string;
+    freshaNote: string;
+    freshaCta: string;
+    freshaOpens: string;
+    altLead: string;
     service: string;
     slot: string;
     name: string;
@@ -235,7 +240,7 @@ export const UI: Record<AppLocale, UiBundle> = {
       titleLine1: 'Topao ambijent,',
       titleEm: 'stručan tim',
       leadProd:
-        'Rezervacija termina ide putem WhatsAppa ili emaila; cjenik na stranici je informativan — točne cijene i raspoloživost potvrdite izravno u salonu.',
+        'Termine rezervirate online putem Fresha aplikacije — odaberite uslugu, dostupan termin i potvrdite rezervaciju. Cjenik na stranici je informativan.',
       leadDev:
         'Ova je demonstracijska verzija stranice: rezervacije, recenzije i cjenik koriste demo podatke; točne cijene i termine potvrdite u salonu ili na',
       ctaBook: 'Rezerviraj termin',
@@ -268,10 +273,10 @@ export const UI: Record<AppLocale, UiBundle> = {
       hoursBody: 'Pon–pet 9–20 h, sub 9–14 h (primjer). Točno radno vrijeme potvrdite u salonu ili na',
       next: 'Sljedeći koraci',
       nextProd:
-        'Na stranici Rezervacije odaberite uslugu i željeni prikaz termina, zatim iste podatke pošaljete putem WhatsAppa ili emaila kako bi salon potvrdio termin.',
+        'Online rezervacija ide putem Fresha sustava — gumb Rezervacije vodi na stranicu za odabir usluge i termina.',
       nextDev:
         'Online rezervacija u demo verziji može koristiti mock termine; za stvarni termin najbrže je nazvati ili napisati na WhatsApp.',
-      bookingForm: 'Forma za rezervaciju',
+      bookingForm: 'Rezerviraj na Fresha',
       sendEmail: 'Pošalji email',
       mailGreeting: 'Poštovani,',
       mailServicePrompt: 'Željena usluga:',
@@ -281,9 +286,15 @@ export const UI: Record<AppLocale, UiBundle> = {
     booking: {
       title: 'Rezervacije',
       leadProd:
-        'Odaberite uslugu i željeni termin (informativni prikaz), upišite kontakt, zatim pošaljite upit putem WhatsAppa ili emaila. Bez backenda — dogovor ide izravno sa salonom.',
+        'Online rezervacija termina odvija se putem Fresha sustava salona. Odaberite uslugu, slobodan termin i dovršite rezervaciju na Fresha stranici.',
       leadDev:
-        'Odaberite uslugu i termin iz demo liste. Ako backend nije pokrenut, slanje na API neće uspjeti — u tom slučaju koristite kontakt ili gumb za prikaz ekrana potvrde (demo).',
+        'Online rezervacija termina odvija se putem Fresha sustava salona. Odaberite uslugu, slobodan termin i dovršite rezervaciju na Fresha stranici.',
+      freshaTitle: 'Online rezervacija',
+      freshaNote:
+        'Kliknite gumb ispod — otvorit će se Fresha stranica salona DEEP BLUE gdje možete odabrati tretman, datum i vrijeme te potvrditi termin.',
+      freshaCta: 'Rezerviraj na Fresha',
+      freshaOpens: 'Otvara se u novoj kartici preglednika.',
+      altLead: 'Za pitanja ili hitne upite možete nazvati salon ili poslati poruku.',
       service: 'Usluga',
       slot: 'Termin',
       name: 'Ime i prezime',
@@ -401,7 +412,7 @@ export const UI: Record<AppLocale, UiBundle> = {
       titleLine1: 'A warm setting,',
       titleEm: 'an expert team',
       leadProd:
-        'Bookings are made via WhatsApp or email; the online price list is indicative — please confirm prices and availability directly with the salon.',
+        'Book appointments online via the salon’s Fresha booking page. Choose a service, time slot, and confirm your booking. The price list on this site is indicative.',
       leadDev:
         'This is a demo website: bookings, reviews and the price list use sample data; confirm prices and appointments with the salon or at',
       ctaBook: 'Book an appointment',
@@ -434,10 +445,10 @@ export const UI: Record<AppLocale, UiBundle> = {
       hoursBody: 'Mon–Fri 9 a.m.–8 p.m., Sat 9 a.m.–2 p.m. (example). Confirm actual hours with the salon or at',
       next: 'Next steps',
       nextProd:
-        'On the Bookings page choose a service and preferred time slot, then send the same details via WhatsApp or email so the salon can confirm.',
+        'Online booking is handled via Fresha — use the Bookings button to open the salon’s booking page.',
       nextDev:
         'Online booking in demo mode may use mock slots; for a real appointment calling or WhatsApp is usually quickest.',
-      bookingForm: 'Booking form',
+      bookingForm: 'Book on Fresha',
       sendEmail: 'Send email',
       mailGreeting: 'Hello,',
       mailServicePrompt: 'Desired service:',
@@ -447,9 +458,15 @@ export const UI: Record<AppLocale, UiBundle> = {
     booking: {
       title: 'Bookings',
       leadProd:
-        'Choose a service and preferred time (indicative), enter your contact details, then continue via WhatsApp or email. No backend — the salon confirms directly with you.',
+        'Appointments are booked online through the salon’s Fresha system. Choose a service, available time, and complete your booking on Fresha.',
       leadDev:
-        'Pick a service and slot from the demo list. If the backend is not running, the API call will fail — use contact details or the demo confirmation button.',
+        'Appointments are booked online through the salon’s Fresha system. Choose a service, available time, and complete your booking on Fresha.',
+      freshaTitle: 'Online booking',
+      freshaNote:
+        'Click the button below to open the DEEP BLUE Fresha page, where you can choose a treatment, date, and time and confirm your appointment.',
+      freshaCta: 'Book on Fresha',
+      freshaOpens: 'Opens in a new browser tab.',
+      altLead: 'For questions or urgent enquiries, call or message the salon.',
       service: 'Service',
       slot: 'Time slot',
       name: 'Full name',

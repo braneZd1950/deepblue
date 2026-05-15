@@ -21,4 +21,8 @@ export const deepblueBrand: SalonBrand = {
     facebook: 'https://www.facebook.com/kozmetickisalondeepblue/',
     whatsapp: 'https://wa.me/385996200337',
   },
+  onlineBooking: {
+    provider: 'fresha',
+    url: 'https://www.fresha.com/hr/a/deep-blue-kozmeticki-salon-zadar-ulica-bana-josipa-jelacica-10-d-43nhpn6n/booking',
+  },
 };
