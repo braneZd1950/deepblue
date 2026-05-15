@@ -37,6 +37,8 @@ export type UiBundle = {
     chipFace: string;
     chipWax: string;
     chipMassage: string;
+    chipNails: string;
+    chipGel: string;
     sectionServices: string;
     featuredDuration: string;
     featuredIntro: string;
@@ -114,6 +116,10 @@ export type UiBundle = {
     reviews: string;
     demoBadge: string;
     imageAlt: string;
+    openImage: string;
+    lightboxClose: string;
+    lightboxPrev: string;
+    lightboxNext: string;
   };
   pricelist: {
     title: string;
@@ -238,6 +244,8 @@ export const UI: Record<AppLocale, UiBundle> = {
       chipFace: 'Tretmani lica',
       chipWax: 'Depilacija',
       chipMassage: 'Masaže i maderoterapija',
+      chipNails: 'Manikura i pedikura',
+      chipGel: 'Gel i trajni lak',
       sectionServices: 'Istaknute usluge',
       featuredDuration: 'min',
       featuredIntro: 'Izdvojeno iz ponude salona. Na stranici',
@@ -322,6 +330,10 @@ export const UI: Record<AppLocale, UiBundle> = {
       reviews: 'Recenzije',
       demoBadge: 'Vaša (demo)',
       imageAlt: 'Fotografija iz galerije salona DEEP BLUE, Zadar.',
+      openImage: 'Otvori fotografiju u punoj veličini',
+      lightboxClose: 'Zatvori',
+      lightboxPrev: 'Prethodna slika',
+      lightboxNext: 'Sljedeća slika',
     },
     pricelist: {
       title: 'Cjenik',
@@ -398,6 +410,8 @@ export const UI: Record<AppLocale, UiBundle> = {
       chipFace: 'Facial treatments',
       chipWax: 'Waxing',
       chipMassage: 'Massages and madero therapy',
+      chipNails: 'Manicure and pedicure',
+      chipGel: 'Gel and permanent polish',
       sectionServices: 'Featured services',
       featuredDuration: 'min',
       featuredIntro: 'A selection from the salon offer. On the',
@@ -481,6 +495,10 @@ export const UI: Record<AppLocale, UiBundle> = {
       reviews: 'Reviews',
       demoBadge: 'Yours (demo)',
       imageAlt: 'Photo from the DEEP BLUE salon gallery, Zadar.',
+      openImage: 'Open photo full size',
+      lightboxClose: 'Close',
+      lightboxPrev: 'Previous image',
+      lightboxNext: 'Next image',
     },
     pricelist: {
       title: 'Price list',

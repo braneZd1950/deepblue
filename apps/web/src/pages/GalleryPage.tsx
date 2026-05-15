@@ -1,5 +1,6 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import type { GalleryItem, Review } from '@salon/shared';
+import { GalleryLightbox } from '@/components/gallery/GalleryLightbox';
 import { loadReviews } from '@/services/api';
 import { loadLocalReviews, mergeReviews } from '@/lib/localReviews';
 import { ReviewForm } from '@/components/reviews/ReviewForm';
@@ -61,10 +62,10 @@ function waSortKey(path: string): number {
 }
 
 function deepBlueGalItems(): GalleryItem[] {
-  const modules = import.meta.glob<string>('../assets/images/deepBlueGal/*.jpg', {
-    eager: true,
-    import: 'default',
-  });
+  const modules = import.meta.glob<string>(
+    ['../assets/images/deepBlueGal/*.jpg', '!../assets/images/deepBlueGal/IMG-20260509-WA0046.jpg'],
+    { eager: true, import: 'default' },
+  );
 
   return Object.entries(modules)
     .sort((a, b) => waSortKey(a[0]) - waSortKey(b[0]))
@@ -87,6 +88,9 @@ export function GalleryPage() {
   const { L } = useLocale();
   const [items] = useState<GalleryItem[]>(localGalleryItems);
   const [reviews, setReviews] = useState<Review[]>([]);
+  const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
+
+  const imageUrls = useMemo(() => items.map((g) => g.imageUrl), [items]);
 
   useEffect(() => {
     if (!showGalleryReviews) return;
@@ -110,12 +114,31 @@ export function GalleryPage() {
       </header>
 
       <div className="db-gallery">
-        {items.map((g) => (
-          <figure key={g.id} className="db-gallery__item">
+        {items.map((g, i) => (
+          <button
+            key={g.id}
+            type="button"
+            className="db-gallery__item"
+            aria-label={L.gallery.openImage}
+            onClick={() => setLightboxIndex(i)}
+          >
             <img src={g.imageUrl} alt={L.gallery.imageAlt} loading="lazy" />
-          </figure>
+          </button>
         ))}
       </div>
+
+      {lightboxIndex !== null && (
+        <GalleryLightbox
+          images={imageUrls}
+          index={lightboxIndex}
+          alt={L.gallery.imageAlt}
+          closeLabel={L.gallery.lightboxClose}
+          prevLabel={L.gallery.lightboxPrev}
+          nextLabel={L.gallery.lightboxNext}
+          onClose={() => setLightboxIndex(null)}
+          onIndexChange={setLightboxIndex}
+        />
+      )}
 
       {showGalleryReviews && (
         <section className="db-reviews" aria-labelledby="reviews-heading">

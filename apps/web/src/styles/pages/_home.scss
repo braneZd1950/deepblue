@@ -80,8 +80,10 @@
   padding: 0;
   display: flex;
   flex-direction: column;
+  flex-wrap: wrap;
   gap: 0.65rem;
   z-index: 1;
+  max-height: 100%;
 }
 
 .db-hero__chips li {

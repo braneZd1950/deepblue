@@ -80,6 +80,8 @@ export function HomePage() {
               <li>{L.home.chipFace}</li>
               <li>{L.home.chipWax}</li>
               <li>{L.home.chipMassage}</li>
+              <li>{L.home.chipNails}</li>
+              <li>{L.home.chipGel}</li>
             </ul>
           </div>
         </div>
