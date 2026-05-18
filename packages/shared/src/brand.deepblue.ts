@@ -12,7 +12,7 @@ export const deepblueBrand: SalonBrand = {
   surfaceColor: '#e1f5ee',
   contact: {
     phone: '+385 99 620 0337',
-    email: 'info@deepblue.hr',
+    email: 'deepblue.zd@gmail.com',
     address: 'Bana Josipa Jelačića 10 D',
     city: '23000 Zadar, Hrvatska',
   },
