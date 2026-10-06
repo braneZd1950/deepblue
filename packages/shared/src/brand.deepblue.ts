@@ -17,7 +17,7 @@ export const deepblueBrand: SalonBrand = {
     city: '23000 Zadar, Hrvatska',
   },
   social: {
-    instagram: 'https://www.instagram.com/kozmetickisalondeepblue/',
+    instagram: 'https://www.instagram.com/deep_blue_kozmeticki/',
     facebook: 'https://www.facebook.com/kozmetickisalondeepblue/',
     whatsapp: 'https://wa.me/385996200337',
   },
