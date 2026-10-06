@@ -75,13 +75,7 @@ export function ContactPage() {
           <h2 id="contact-hours" className="db-contact__card-title">
             {L.contact.hours}
           </h2>
-          <p className="db-contact__text">
-            {L.contact.hoursBody}{' '}
-            <a href={`https://${brand.domain}`} target="_blank" rel="noopener noreferrer">
-              {brand.domain}
-            </a>
-            .
-          </p>
+          <p className="db-contact__text">{L.contact.hoursBody}</p>
         </section>
 
         <section className="db-contact__card db-contact__card--wide" aria-labelledby="contact-next">

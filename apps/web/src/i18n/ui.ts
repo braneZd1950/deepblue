@@ -269,8 +269,9 @@ export const UI: Record<AppLocale, UiBundle> = {
       email: 'Email',
       whatsapp: 'WhatsApp',
       sendMessage: 'Pošalji poruku',
-      hours: 'Radno vrijeme (informativno)',
-      hoursBody: 'Pon–pet 9–20 h, sub 9–14 h (primjer). Točno radno vrijeme potvrdite u salonu ili na',
+      hours: 'Radno vrijeme',
+      hoursBody:
+        'Pon–pet 8–20 h, sub 8–13 h. Nedjeljom i blagdanom zatvoreno.',
       next: 'Sljedeći koraci',
       nextProd:
         'Online rezervacija ide putem Fresha sustava — gumb Rezervacije vodi na stranicu za odabir usluge i termina.',
@@ -441,8 +442,8 @@ export const UI: Record<AppLocale, UiBundle> = {
       email: 'Email',
       whatsapp: 'WhatsApp',
       sendMessage: 'Send a message',
-      hours: 'Opening hours (indicative)',
-      hoursBody: 'Mon–Fri 9 a.m.–8 p.m., Sat 9 a.m.–2 p.m. (example). Confirm actual hours with the salon or at',
+      hours: 'Opening hours',
+      hoursBody: 'Mon–Fri 8 a.m.–8 p.m., Sat 8 a.m.–1 p.m. Closed on Sundays and public holidays.',
       next: 'Next steps',
       nextProd:
         'Online booking is handled via Fresha — use the Bookings button to open the salon’s booking page.',

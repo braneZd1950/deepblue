@@ -63,7 +63,16 @@ function waSortKey(path: string): number {
 
 function deepBlueGalItems(): GalleryItem[] {
   const modules = import.meta.glob<string>(
-    ['../assets/images/deepBlueGal/*.jpg', '!../assets/images/deepBlueGal/IMG-20260509-WA0046.jpg'],
+    [
+      '../assets/images/deepBlueGal/*.jpg',
+      '!../assets/images/deepBlueGal/IMG-20260509-WA0009.jpg',
+      '!../assets/images/deepBlueGal/IMG-20260509-WA0017.jpg',
+      '!../assets/images/deepBlueGal/IMG-20260509-WA0018.jpg',
+      '!../assets/images/deepBlueGal/IMG-20260509-WA0019.jpg',
+      '!../assets/images/deepBlueGal/IMG-20260509-WA0032.jpg',
+      '!../assets/images/deepBlueGal/IMG-20260509-WA0035.jpg',
+      '!../assets/images/deepBlueGal/IMG-20260509-WA0046.jpg',
+    ],
     { eager: true, import: 'default' },
   );
 
